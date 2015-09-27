@@ -36,7 +36,7 @@ Chef 12 or newer is required.
 
 ## Resources
 
-### `application_celery_worker`
+### `application_celery_beat`
 
 The `application_celery_beat` resource creates a service for the `celery beat`
 process.
@@ -266,6 +266,34 @@ end
 ```
 
 All actions and properties are the same as the [`python_runtime` resource](https://github.com/poise/poise-python#python_runtime).
+
+### `application_python_execute`
+
+The `application_python_execute` resource runs Python commands for the deployment.
+
+```ruby
+application '/srv/myapp' do
+  python_execute 'setup.py install'
+end
+```
+
+All actions and properties are the same as the [`python_execute` resource](https://github.com/poise/poise-python#python_execute),
+except that the `cwd`, `environment`, `group`, and `user` properties default to
+the application-level data if not specified.
+
+### `application_python_package`
+
+The `application_python_package` resource installs Python packages for the deployment.
+
+```ruby
+application '/srv/myapp' do
+  python_package 'requests'
+end
+```
+
+All actions and properties are the same as the [`python_package` resource](https://github.com/poise/poise-python#python_package),
+except that the `group` and `user` properties default to the application-level
+data if not specified.
 
 ### `application_virtualenv`
 
